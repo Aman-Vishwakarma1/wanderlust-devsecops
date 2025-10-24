@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  mongo_db:
+    container_name: mongo_db_wanderlust
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    container_name: redis_container
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+
+  nodejs_app:
+    container_name: backend_wanderlust
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    working_dir: /usr/src/wanderlust
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo_db:27017/wanderlust
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo_db
+      - redis
+
+  react_app:
+    container_name: frontend_wanderlust
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    working_dir: /usr/src/wanderlust
+    environment:
+      - VITE_API_PATH=http://localhost:3000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - nodejs_app
+
+volumes:
+  mongo_data: {}
