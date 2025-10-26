@@ -18,7 +18,7 @@ pipeline{
         stage("OWASP Dependency Check"){
             steps{
                 script {
-                    dependencyCheck(
+                    runDependencyCheck(
                         additionalArguments: '--scan ./',
                         odcInstallation: 'wanderlust-owasp-dependency-check'
                     )
