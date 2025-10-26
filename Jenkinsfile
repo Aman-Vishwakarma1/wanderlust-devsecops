@@ -15,6 +15,11 @@ pipeline{
                 sonarqubeCheck("wanderlust-sonarqube","wanderlustProj","wanderljustProj")
             }
         }
+        stage("OWASP Dependency Check"){
+            steps{
+                dependencyCheck("wanderlust-owasp-dependency-check")
+            }
+        }
         stage('trivy security check'){
             steps{
                 echo "trivy security check"
