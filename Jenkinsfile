@@ -23,7 +23,9 @@ pipeline{
         stage('Build'){
             steps{
                 echo "Building......"
-                sh "docker compose up -d"
+                sh 'docker compose up -d'
+                sh 'docker compose ps'   
+                sh 'sleep 10'   
             }
         }
         stage('Test'){
