@@ -22,7 +22,8 @@ pipeline{
         }
         stage('trivy security check'){
             steps{
-                echo "trivy security check"
+                trivy()
+
             }
         }
         stage('Build'){
