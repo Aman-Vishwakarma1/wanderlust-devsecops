@@ -17,7 +17,12 @@ pipeline{
         }
         stage("OWASP Dependency Check"){
             steps{
-                dependencyCheck("wanderlust-owasp-dependency-check")
+                script {
+                    dependencyCheck(
+                        additionalArguments: '--scan ./',
+                        odcInstallation: 'wanderlust-owasp-dependency-check'
+                    )
+                }
             }
         }
         stage('trivy security check'){
