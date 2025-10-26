@@ -43,6 +43,11 @@ pipeline{
         stage('Test'){
             steps{
                 echo "Running Test Cases......"
+                dir('backend') {
+                sh 'npm install'
+                sh 'npm test'
+        }
+
             }
         }
         stage('Deploy'){
