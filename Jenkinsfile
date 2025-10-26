@@ -1,3 +1,5 @@
+@Library('shared') _
+
 pipeline{
     agent {label 'devsecops-agent'}
     stages{
@@ -9,7 +11,8 @@ pipeline{
         }
         stage('SonarQube code quality analysis'){
             steps{
-                echo "Sonarqube"
+                echo "Initializing SonarQube Code Quality Analysis........."
+                sonarqubeCheck("wanderlust-sonarqube","wanderlustProj","wanderljustProj")
             }
         }
         stage('trivy security check'){
@@ -20,6 +23,7 @@ pipeline{
         stage('Build'){
             steps{
                 echo "Building......"
+                sh "doker-compose up"
             }
         }
         stage('Test'){
