@@ -27,7 +27,7 @@ pipeline{
         }
         stage('trivy security check'){
             steps{
-                trivy()
+                runtrivy()
 
             }
         }
