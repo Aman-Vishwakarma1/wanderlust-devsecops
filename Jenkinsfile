@@ -3,9 +3,9 @@
 pipeline{
     agent {label 'devsecops-agent'}
     stages{
-        stage('cloning code from Github'){
+        stage('Clone code from Github'){
             steps{
-                echo "cloning code from github"
+                echo "Cloning code from github"
                 git url: 'https://github.com/Aman-Vishwakarma1/wanderlust-devsecops.git', branch:'main'
             }
         }
@@ -23,7 +23,7 @@ pipeline{
         stage('Build'){
             steps{
                 echo "Building......"
-                sh "doker-compose up"
+                sh "docker-compose up"
             }
         }
         stage('Test'){
