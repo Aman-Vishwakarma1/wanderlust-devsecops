@@ -22,7 +22,7 @@ pipeline{
 
                 script {
                     runDependencyCheck(
-                        additionalArguments: '--scan ./',
+                        additionalArguments: '--scan ./backend --scan ./frontend --scan ./node_modules --formate HTML -out wanderlust-owasp-dependency-check-report',
                         odcInstallation: 'wanderlust-owasp-dependency-check'
                     )
                 }
