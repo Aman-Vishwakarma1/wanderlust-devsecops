@@ -17,6 +17,9 @@ pipeline{
         }
         stage("OWASP Dependency Check"){
             steps{
+                echo "Installing Dependency"
+                sh "npm run install-frontend && npm run install-backend"
+
                 script {
                     runDependencyCheck(
                         additionalArguments: '--scan ./',
